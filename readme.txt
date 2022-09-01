@@ -1,1 +1,1 @@
-This repository is for pattern recognition 
+This repository is for pattern recognition
