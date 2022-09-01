@@ -1,14 +1,14 @@
 symbols1 = readmatrix("experimental_data");  %symbols alphabet 3 carriers
 symbols2 = readmatrix("simulation_data");
 
-symbols= symbols1;   %Change everytime you chose a different file to generata data
+symbols= symbols2;   %Change everytime you chose a different file to generata data
 
 SNR_values = readmatrix("SNR_data");  %matrix with the SNR-e values calculated when amplifiers are used.
 [numRows,numCols] = size(symbols)
 
 n_samples_per_symbol=100000;
 t = (0:1:n_samples_per_symbol-1)';
-P_tags = 35:1:50;
+P_tags = 30:1:50;
 G_tags =[1 2 100];
 
 v1 =[];
@@ -49,7 +49,7 @@ end
 GT=[v1 v2 v3];
 %GT = GT(randperm(size(GT, 1)), :);
 
-writematrix(GT,'Training_data_35_50.csv') 
+writematrix(GT,'simulation_30_50.csv') 
 
 
 plot(t,[x y])

@@ -12,6 +12,9 @@ from sklearn.metrics import confusion_matrix
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import time
+
+
 sns.set_theme(style="darkgrid")
 
 #Model 1 completed
@@ -24,13 +27,13 @@ sns.set_theme(style="darkgrid")
 dic36= r'C:\Users\Titan\OneDrive - Aston University\Desktop\PIXNET\Thesis Osaka\paper_pr\36BER_DIC.csv'
 dicc = pd.read_csv(dic36,header=None)
 #Machine Learning model file path
-filename = 'MLP_1_CV_11.pkl'
+filename = 'MLP_1_CV_12s.pkl'
 
 
 
 data1 = r'C:\Users\Titan\OneDrive - Aston University\Desktop\PIXNET\Thesis Osaka\paper_pr\Validation_data_sim.csv'
 data2 = r'C:\Users\Titan\OneDrive - Aston University\Desktop\PIXNET\Thesis Osaka\paper_pr\Validation_data_exp.csv'
-data3 = r'C:\Users\Titan\OneDrive - Aston University\Desktop\PIXNET\Thesis Osaka\paper_pr\Training_data_35_50.csv'
+data3 = r'C:\Users\Titan\OneDrive - Aston University\Desktop\PIXNET\Thesis Osaka\paper_pr\simulation_30_50.csv'
 
 training = pd.read_csv(data3)
 #print(training.describe().transpose())
@@ -40,16 +43,16 @@ training = pd.read_csv(data3)
 Xt_n = training.iloc[:,[0,1,2,3,4,5]]
 Xt_n.columns = ['f1','f2','f3','symbol','power','gain']
 #Xt = Xt_n[(Xt_n.f1>0)&(Xt_n.f2>0)&(Xt_n.f3>0)]
-Xt = Xt_n[(Xt_n.power>=41)&(Xt_n.power<=45)]
-#print(Xt.describe().transpose())
+Xt = Xt_n[(Xt_n.power>=40)&(Xt_n.power<=45)]
+print(Xt.describe().transpose())
 xtt=Xt
 
 
 
 bertotal=[]
 acctotal=[]
-snr =np.array(np.arange(41,46))
-
+snr =np.array(np.arange(40,46))
+start_time = time.time()
 for a in snr:
     Xt=xtt
     Xt =Xt[(Xt.power==a)]
@@ -88,16 +91,17 @@ for a in snr:
     
     acctotal.append(result)
     bertotal.append(ber)
-    
+print("--- %s seconds ---" % (time.time() - start_time))    
    
 #plot of accuracy
 plt.figure()
 Ann = sns.scatterplot( x=snr,y=bertotal,color='black')
 Ann.set_xlabel("SNR dB", fontsize = 15)
 Ann.set_ylabel("BER", fontsize = 15)
-Ann.set_title('Model 11 ANN BER Experimental \n Data range 41 to 45 SNR. Symbols constellation 36')
-
-plt.savefig('Model #11 ANNBER.jpg', format='jpeg', dpi=500)
+Ann.set_title('Model 11 ANN BER simulated \n Data range 40 to 45 SNR. Symbols constellation 36')
+ax = plt.gca()
+#Ann.set_ylim([0.0000001,0.003])
+plt.savefig('Model #11 ANNBERs.jpg', format='jpeg', dpi=500)
 
 
 #plot of BER
@@ -105,11 +109,10 @@ plt.figure()
 Annb = sns.scatterplot( x=snr,y=acctotal,color='black')
 Annb.set_xlabel("SNR dB", fontsize = 15)
 Annb.set_ylabel("Accuracy", fontsize = 15)
-Annb.set_title('Model 11 ANN accuracy Experimental \n Data range 41 to 45 SNR. Symbols constellation 36')
-ax = plt.gca()
-ax.set_ylim([0.0000001, 0.000001])
+Annb.set_title('Model 11 ANN accuracy simulated \n Data range 40 to 45 SNR. Symbols constellation 36')
 
-plt.savefig('Model #11 ANNACC.jpg', format='jpeg', dpi=500)
+
+plt.savefig('Model #11 ANNACCs.jpg', format='jpeg', dpi=500)
 
 
 
