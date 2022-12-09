@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 sns.set_theme(style="darkgrid")
 
 
-BER=r'C:\Users\Titan\OneDrive - Aston University\Desktop\PIXNET\Thesis Osaka\paper_pr\BER_simulation_MODELS.csv'
+BER=r'C:\Users\crist\OneDrive\Escritorio\PatternRecog-main\PatternRecog-main\BER_simulation_MODELS_LOG10.csv'
 
 
 
@@ -48,14 +48,14 @@ ber= ber.to_numpy()
 
 
 plt.figure()
-# Annb = sns.lineplot( x=snr,y=ber[n:m,1],color='black',label='Trained range: 10-50')
-# Annb = sns.lineplot( x=snr,y=ber[n:m,2],color='yellow',label='Trained range: 15-50')
-Annb = sns.lineplot( x=snr,y=ber[n:m,3],color='red',label='Trained range signals: 20-50 (dB)',marker='H')
-# Annb = sns.lineplot( x=snr,y=ber[n:m,4],color='cyan',label='Trained range: 25-30')
-# Annb = sns.lineplot( x=snr,y=ber[n:m,4],color='purple',label='Trained range: 30-35')
-Annb = sns.lineplot( x=snr,y=1e-03,color='blue',label='FEC Limit',marker="D")
+Annb = sns.lineplot( x=snr,y=ber[n:m,1],color='black',label='Trained range: 10-50')
+Annb = sns.lineplot( x=snr,y=ber[n:m,2],color='yellow',label='Trained range: 15-50')
+Annb = sns.lineplot( x=snr,y=ber[n:m,3],color='red',label='Trained range: 20-50',marker='H')
+Annb = sns.lineplot( x=snr,y=ber[n:m,4],color='cyan',label='Trained range: 25-30')
+Annb = sns.lineplot( x=snr,y=ber[n:m,4],color='purple',label='Trained range: 30-35')
+Annb = sns.lineplot( x=snr,y=-3,color='blue',label='FEC Limit',marker="D")
 Annb.set_xlabel("SNR dB", fontsize = 15)
-Annb.set_ylabel("BER", fontsize = 15)
+Annb.set_ylabel("BER (Log 10)", fontsize = 15)
 Annb.set_title('BER vs SNR in ANN ',fontsize = 16)
 #plt.ylim(0.0000001, 0.03)
 # plt.xlim(27, 34)
